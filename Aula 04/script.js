@@ -18,7 +18,7 @@ function adicionarTarefa() {
         tarefas.push(tarefa);
         renderizarTarefas();
     };
-
+    
     inputTarefa.value = "";
     inputTarefa.focus();
 };
@@ -33,7 +33,6 @@ function renderizarTarefas() {
         novaTarefa.textContent = tarefas[i];
         listaTarefas.appendChild(novaTarefa);
     };
-
 };
 
 
