@@ -31,16 +31,18 @@ function botaoLimpar() {
     let btnLimpar = document.getElementById("btnLimpar");
 
     if (tarefas.length === 0) {
-        if(btnLimpar) btnLimpar.remove();
+        btnLimpar.remove();
         return;
     };
+
+    // operador ! (negação lógica)
 
     if (!btnLimpar) {
         btnLimpar = document.createElement("button");
         btnLimpar.id = "btnLimpar"
         btnLimpar.className = "botao_lista"
         btnLimpar.textContent = "Limpar Tudo"
-        btnLimpar.onclick = () => limparLista();
+        btnLimpar.onclick = limparLista;
 
         btn.appendChild(btnLimpar);
     };
@@ -70,11 +72,8 @@ function renderizarTarefas() {
         novaTarefa.appendChild(botaoRemover);
         novaTarefa.appendChild(botaoEditar);
         listaTarefas.appendChild(novaTarefa);
-
-        botaoLimpar();
     };
-
-
+    botaoLimpar();
 };
 
 function removerTarefa(i) {
