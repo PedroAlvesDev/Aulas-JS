@@ -1,8 +1,11 @@
 let tarefas = [];
+let btn = document.getElementById("btn");
 
 function adicionarTarefa() {
     const inputTarefa = document.getElementById("inputTarefa");
     let tarefa = inputTarefa.value.trim();
+
+
 
     const mensagem = document.getElementById("mensagem")
 
@@ -18,16 +21,37 @@ function adicionarTarefa() {
         tarefas.push(tarefa);
         renderizarTarefas();
     };
-    
+
+
     inputTarefa.value = "";
     inputTarefa.focus();
 };
+
+function botaoLimpar() {
+    let btnLimpar = document.getElementById("btnLimpar");
+
+    if (tarefas.length === 0) {
+        if(btnLimpar) btnLimpar.remove();
+        return;
+    };
+
+    if (!btnLimpar) {
+        btnLimpar = document.createElement("button");
+        btnLimpar.id = "btnLimpar"
+        btnLimpar.className = "botao_lista"
+        btnLimpar.textContent = "Limpar Tudo"
+        btnLimpar.onclick = () => limparLista();
+
+        btn.appendChild(btnLimpar);
+    };
+
+};
+
 
 function renderizarTarefas() {
     const listaTarefas = document.getElementById("listaTarefas");
     listaTarefas.innerHTML = "";
 
-    
     for (let i = 0; i < tarefas.length; i++) {
         let novaTarefa = document.createElement("li");
         novaTarefa.textContent = tarefas[i];
@@ -46,7 +70,11 @@ function renderizarTarefas() {
         novaTarefa.appendChild(botaoRemover);
         novaTarefa.appendChild(botaoEditar);
         listaTarefas.appendChild(novaTarefa);
+
+        botaoLimpar();
     };
+
+
 };
 
 function removerTarefa(i) {
@@ -54,7 +82,7 @@ function removerTarefa(i) {
     renderizarTarefas();
 };
 
-function editarTarefa (i) {
+function editarTarefa(i) {
     let tarefaEditada = prompt("Edite a tarefa:");
     if (tarefaEditada.trim() !== "") {
         tarefas[i] = tarefaEditada;
@@ -68,3 +96,4 @@ function limparLista() {
     const mensagem = document.getElementById("mensagem")
     mensagem.textContent = "Lista de tarefas limpa com sucesso!"
 };
+
